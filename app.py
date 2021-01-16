@@ -48,13 +48,11 @@ def handle_sticker_message(event):
 
 @handler.add(MessageEvent, message = FileMessage)
 def handle_file_message(event):
-    print(event.message.file_name)
     if event.message.file_name.endswith('.txt'):
         content = line_bot_api.get_message_content(event.message.id)
         content_message = ''
         for chunk in content.iter_content():
-            print(chunk)
-            # content_message += chunk
+            content_message += chunk.decode('UTF-8')
         
         print(content_message)
         return_message = translate(content_message)
