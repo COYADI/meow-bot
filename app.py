@@ -48,8 +48,8 @@ def handle_sticker_message(event):
 
 @handler.add(MessageEvent, message = FileMessage)
 def handle_file_message(event):
-    print(event.message, event.message.fileName)
-    if event.message.fileName.endswith('.txt'):
+    print(event.message)
+    if event.message.file_name.endswith('.txt'):
         content = line_bot_api.get_message_content(event.message.id)
         content_message = ''
         for chunk in content.iter_content():
