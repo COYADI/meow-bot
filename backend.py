@@ -9,4 +9,4 @@ def translate(sentence):
     elif detected_lang == 'zh-TW' or detected_lang == 'zh-CN':
         return translator.translate(sentence, dest = 'ja').text
     else:
-        return '我聽不懂耶Meow :('
+        return '我聽不懂耶喵講中文或日文好嗎 :(\n中国語または日本語を話してくださニャー :('

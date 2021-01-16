@@ -46,6 +46,25 @@ def handle_sticker_message(event):
         TextSendMessage(text = 'Meow!')
     )
 
+@handler.add(MessageEvent, message = FileMessage)
+def handle_file_message(event):
+    if event.message.fileName.endswith('.txt'):
+        content = line_bot_api.get_message_content(event.message.id)
+        content_message = ''
+        for chunk in content.iter_content():
+            content_message += chunk
+        
+        print(content_message)
+        return_message = translate(content_message)
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text = return_message)
+        )
+    else:
+        line_bot_api.reply_message(
+            event.reply_token,
+            [TextSendMessage(text = '這是什麼呀?能吃嗎?'), ImageSendMessage(original_content_url = 'https://maoup.com.tw/wp-content/uploads/2015/07/114.png', preview_image_url = 'https://maoup.com.tw/wp-content/uploads/2015/07/114.png')]
+        )
 
 if __name__ == "__main__":
     app.run()
