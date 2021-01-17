@@ -31,6 +31,17 @@ def callback():
 
     return 'OK'
 
+@app.route('/cat-meow', methods = ['GET'])
+def meow():
+     path_to_file = "/meow.m4a"
+
+     return send_file(
+         path_to_file, 
+         mimetype="audio/wav", 
+         as_attachment=True, 
+         attachment_filename="meow.m4a")
+
+
 @handler.add(MessageEvent, message = TextMessage)
 def handle_text_message(event):
     if event.message.text == '喵喵歌':
