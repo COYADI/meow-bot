@@ -3,7 +3,6 @@ from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import *
 from backend import *
-
 import configparser
 
 app = Flask(__name__)
@@ -34,10 +33,23 @@ def callback():
 
 @handler.add(MessageEvent, message = TextMessage)
 def handle_text_message(event):
-    return_message = TextSendMessage(text = translate(event.message.text))
-    line_bot_api.reply_message(
-        event.reply_token,
-        return_message)
+    if event.message.text == '喵喵歌':
+        pass
+    elif event.message.text == '喵喵叫':
+        pass
+    elif event.message.text == '喵喵圖':
+        image_url = find_cat_image()
+        return_message = ImageSendMessage(original_content_url = image_url, preview_image_url = image_url)
+        line_bot_api.reply_message(
+            event.reply_token,
+            return_message
+        )
+    else:
+        return_message = TextSendMessage(text = translate(event.message.text))
+        line_bot_api.reply_message(
+            event.reply_token,
+            return_message
+        )
 
 @handler.add(MessageEvent, message = StickerMessage)
 def handle_sticker_message(event):
@@ -57,7 +69,7 @@ def handle_file_message(event):
         
         return_message = TextSendMessage(text = content_message)
     else:
-        return_message = [TextSendMessage(text = '這是什麼呀?能吃嗎?'), ImageSendMessage(original_content_url = 'https://maoup.com.tw/wp-content/uploads/2015/07/114.png', preview_image_url = 'https://maoup.com.tw/wp-content/uploads/2015/07/114.png')]
+        return_message = [TextSendMessage(text = '這是什麼呀?能吃喵?'), ImageSendMessage(original_content_url = 'https://maoup.com.tw/wp-content/uploads/2015/07/114.png', preview_image_url = 'https://maoup.com.tw/wp-content/uploads/2015/07/114.png')]
 
     line_bot_api.reply_message(
         event.reply_token,
@@ -72,6 +84,24 @@ def handle_sticker_message(event):
         event.reply_token,
         return_message
     )
+
+@handler.add(MessageEvent, message = VideoMessage)
+def handle_video_message(event):
+    return_message = [TextSendMessage(text = '這是什麼呀?能吃喵?'), ImageSendMessage(original_content_url = 'https://maoup.com.tw/wp-content/uploads/2015/07/114.png', preview_image_url = 'https://maoup.com.tw/wp-content/uploads/2015/07/114.png')]
+    line_bot_api.reply_message(
+        event.reply_token,
+        return_message
+    )
+
+@handler.add(MessageEvent, message = ImageMessage)
+def handle_image_message(event):
+    return_message = [TextSendMessage(text = '這是什麼呀?能吃喵?'), ImageSendMessage(original_content_url = 'https://maoup.com.tw/wp-content/uploads/2015/07/114.png', preview_image_url = 'https://maoup.com.tw/wp-content/uploads/2015/07/114.png')]
+    line_bot_api.reply_message(
+        event.reply_token,
+        return_message
+    )
+
+
 
 
 if __name__ == "__main__":
