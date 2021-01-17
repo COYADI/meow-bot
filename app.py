@@ -37,7 +37,7 @@ def meow():
 
      return send_file(
          path_to_file, 
-         mimetype="audio/wav", 
+         mimetype="audio/m4a", 
          as_attachment=True, 
          attachment_filename="meow.m4a")
 
