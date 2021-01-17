@@ -34,16 +34,17 @@ def callback():
 
 @handler.add(MessageEvent, message = TextMessage)
 def handle_text_message(event):
-    return_message = translate(event.message.text)
+    return_message = TextSendMessage(text = translate(event.message.text))
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text = return_message))
+        return_message)
 
 @handler.add(MessageEvent, message = StickerMessage)
 def handle_sticker_message(event):
+    return_message = TextSendMessage(text = 'Meow!')
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text = 'Meow!')
+        return_message
     )
 
 @handler.add(MessageEvent, message = FileMessage)
@@ -54,16 +55,24 @@ def handle_file_message(event):
         for chunk in content.iter_content():
             content_message += translate(chunk.decode('UTF-8'))
         
-        return_message = content_message
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text = return_message)
-        )
+        return_message = TextSendMessage(text = content_message)
     else:
-        line_bot_api.reply_message(
-            event.reply_token,
-            [TextSendMessage(text = '這是什麼呀?能吃嗎?'), ImageSendMessage(original_content_url = 'https://maoup.com.tw/wp-content/uploads/2015/07/114.png', preview_image_url = 'https://maoup.com.tw/wp-content/uploads/2015/07/114.png')]
-        )
+        return_message = [TextSendMessage(text = '這是什麼呀?能吃嗎?'), ImageSendMessage(original_content_url = 'https://maoup.com.tw/wp-content/uploads/2015/07/114.png', preview_image_url = 'https://maoup.com.tw/wp-content/uploads/2015/07/114.png')]
+
+    line_bot_api.reply_message(
+        event.reply_token,
+        return_message
+    )
+
+@handler.add(MessageEvent, message = StickerMessage)
+def handle_sticker_message(event):
+    package_id, sticker_id = gen_sticker()
+    return_message = StickerSendMessage(package_id = package_id, sticker_id = sticker_id)
+    line_bot_api.reply_message(
+        event.reply_token,
+        return_message
+    )
+
 
 if __name__ == "__main__":
     app.run()
