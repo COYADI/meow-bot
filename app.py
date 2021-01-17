@@ -52,10 +52,9 @@ def handle_file_message(event):
         content = line_bot_api.get_message_content(event.message.id)
         content_message = ''
         for chunk in content.iter_content():
-            content_message += chunk.decode('UTF-8')
+            content_message += translate(chunk.decode('UTF-8'))
         
-        print(content_message)
-        return_message = translate(content_message)
+        return_message = content_message
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text = return_message)
