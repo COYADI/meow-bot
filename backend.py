@@ -26,7 +26,7 @@ def gen_sticker():
 def find_cat_image():
     image_list = []
     image_search_keyword = ['可愛貓咪', '貓咪可愛', 'cute cat', 'cat cute', 'かわいいねこ', 'かわいい猫']
-    target_url = f'https://www.google.com/search?q={image_search_keyword[random.randint(0, len(image_search_keyword - 1))]}&tbm=isch'
+    target_url = f'https://www.google.com/search?q={image_search_keyword[random.randint(0, len(image_search_keyword) - 1)]}&tbm=isch'
     r = requests.get(target_url)
     soup = BeautifulSoup(r.content.decode('utf-8', 'ignore'), 'html.parser')
     images = soup.findAll('img', class_ = 't0fcAb')
