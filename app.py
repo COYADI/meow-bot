@@ -46,7 +46,7 @@ def callback():
 @handler.add(MessageEvent, message = TextMessage)
 def handle_text_message(event):
     if event.message.text == '喵喵歌':
-        return_message = TextSendMessage(text = 'https://www.youtube.com/watch?v=ySv4IlpqF0E')
+        return_message = [TextSendMessage(text = 'ニャースのうた'), VideoSendMessage(original_content_url = 'https://drive.google.com/uc?export=download&id=12_W5__qDWSZDJOYpLPhd4pdkxaasBYOK', preview_image_url = 'https://i0.hdslb.com/bfs/archive/a6eeaffc2bc8841c21c4f5b77a7bf7d37400ad9d.jpg')]
     elif event.message.text == '喵喵叫':
         return_message = [AudioSendMessage(original_content_url = 'https://drive.google.com/uc?export=download&id=19E-yhLuu0wjIstQB1JyZP9mzm1LXfV3Y', duration = 1500), TextSendMessage(text = meow())]
     elif event.message.text == '喵喵圖':
