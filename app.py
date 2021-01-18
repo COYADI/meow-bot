@@ -113,7 +113,7 @@ def handle_image_message(event):
 @handler.add(FollowEvent)
 def handle_follow_event(event):
     print(event.source)
-    return_message = '感謝你的使用喵 !\n我可以進行中文以及日文的雙向翻譯喵 !\n也可以是是看下方的選單喵 !'
+    return_message = TextSendMessage(text = '感謝你的使用喵 !\n我可以進行中文以及日文的雙向翻譯喵 !\n也可以是是看下方的選單喵 !')
     line_bot_api.reply_message(
         event.reply_token,
         return_message
