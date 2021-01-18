@@ -48,7 +48,7 @@ def handle_text_message(event):
     if event.message.text == '喵喵歌':
         return_message = TextSendMessage(text = 'https://www.youtube.com/watch?v=ySv4IlpqF0E')
     elif event.message.text == '喵喵叫':
-        return_message = [AudioSendMessage(original_content_url = 'https://doc-10-4g-docs.googleusercontent.com/docs/securesc/44vl82qm4i16ubl1gc8ppsdekpoecipt/2q761jdqvbdi5gs7c35i1148it0r4kb8/1610933100000/08753032096129646545/08753032096129646545/19E-yhLuu0wjIstQB1JyZP9mzm1LXfV3Y?e=download&authuser=0', duration = 1500), TextSendMessage(text = meow())]
+        return_message = [AudioSendMessage(original_content_url = 'https://freesound.org/people/Christyboy100/sounds/495694/download/495694__christyboy100__cat-meow.m4a', duration = 1500), TextSendMessage(text = meow())]
     elif event.message.text == '喵喵圖':
         image_url = find_cat_image()
         return_message = ImageSendMessage(original_content_url = image_url, preview_image_url = image_url)
