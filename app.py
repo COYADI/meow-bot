@@ -3,6 +3,7 @@ from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import *
 from backend import *
+from pydub import AudioSegment
 import configparser
 
 app = Flask(__name__)
@@ -31,13 +32,13 @@ def callback():
 
     return 'OK'
 
-@app.route('/cat-meow', methods = ['GET'])
+@app.route('/meow.m4a', methods = ['GET'])
 def meow():
-     path_to_file = "/meow.m4a"
+     meow_file = AudioSegment.from_file('./meow.m4a')
 
      return send_file(
-         path_to_file, 
-         mimetype="audio/m4a", 
+         meow_file, 
+         mimetype="audio/x-m4a", 
          as_attachment=True, 
          attachment_filename="meow.m4a")
 
@@ -45,22 +46,18 @@ def meow():
 @handler.add(MessageEvent, message = TextMessage)
 def handle_text_message(event):
     if event.message.text == '喵喵歌':
-        pass
+        return_message = TextSendMessage(text = 'https://www.youtube.com/watch?v=ySv4IlpqF0E')
     elif event.message.text == '喵喵叫':
-        pass
+        return_message = TextSendMessage(text = meow())
     elif event.message.text == '喵喵圖':
         image_url = find_cat_image()
         return_message = ImageSendMessage(original_content_url = image_url, preview_image_url = image_url)
-        line_bot_api.reply_message(
-            event.reply_token,
-            return_message
-        )
     else:
         return_message = TextSendMessage(text = translate(event.message.text))
-        line_bot_api.reply_message(
-            event.reply_token,
-            return_message
-        )
+    line_bot_api.reply_message(
+        event.reply_token,
+        return_message
+    )
 
 @handler.add(MessageEvent, message = StickerMessage)
 def handle_sticker_message(event):

@@ -1,5 +1,6 @@
 from googletrans import Translator
 from bs4 import BeautifulSoup
+from data import *
 import random, requests
 
 translator = Translator()
@@ -25,7 +26,6 @@ def gen_sticker():
 
 def find_cat_image():
     image_list = []
-    image_search_keyword = ['可愛貓咪', '貓咪可愛', 'cute cat', 'cat cute', 'かわいいねこ', 'かわいい猫']
     target_url = f'https://www.google.com/search?q={image_search_keyword[random.randint(0, len(image_search_keyword) - 1)]}&tbm=isch'
     r = requests.get(target_url)
     soup = BeautifulSoup(r.content.decode('utf-8', 'ignore'), 'html.parser')
@@ -33,3 +33,10 @@ def find_cat_image():
     for image in images:
         image_list.append(image['src'])
     return image_list[random.randint(0, len(image_list) - 1)]
+
+def meow():
+    target_lang = lang_abb[random.randint(0, len(lang_abb) - 1)]
+    the_meow = translator.translate('喵', dest = target_lang).text
+    meow_lang = translator.translate(lang_codes[target_lang], dest = 'zh-tw').text
+    res = f'{the_meow} !, {meow_lang}這樣喵 !'
+    return res
