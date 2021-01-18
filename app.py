@@ -42,7 +42,7 @@ def meow_voice():
          as_attachment=True, 
          attachment_filename="meow.m4a")
 
-
+# handle message event
 @handler.add(MessageEvent, message = TextMessage)
 def handle_text_message(event):
     if event.message.text == '喵喵歌':
@@ -104,6 +104,16 @@ def handle_video_message(event):
 @handler.add(MessageEvent, message = ImageMessage)
 def handle_image_message(event):
     return_message = [TextSendMessage(text = '這是什麼呀?能吃喵?'), ImageSendMessage(original_content_url = 'https://maoup.com.tw/wp-content/uploads/2015/07/114.png', preview_image_url = 'https://maoup.com.tw/wp-content/uploads/2015/07/114.png')]
+    line_bot_api.reply_message(
+        event.reply_token,
+        return_message
+    )
+
+# handle follow event
+@handler.add(FollowEvent)
+def handle_follow_event(event):
+    print(event.source)
+    return_message = '感謝你的使用喵 !\n我可以進行中文以及日文的雙向翻譯喵 !\n也可以是是看下方的選單喵 !'
     line_bot_api.reply_message(
         event.reply_token,
         return_message
