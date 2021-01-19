@@ -12,8 +12,8 @@ This is Meow BOT for LINE created by Yuchia Kuo
     * 喵喵圖 returning a cute cat image
 
 
-### To Contact
-* through LINE ID : @426rsiov, or
+### To Use
+* add through LINE ID : @426rsiov, or
 * QR Code
 
 
