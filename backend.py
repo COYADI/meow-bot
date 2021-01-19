@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from data import *
 import random, requests
 
+# translate between Japanese and Chinese
 translator = Translator()
 def translate(sentence):
     detected_lang = translator.detect(sentence).lang
@@ -14,6 +15,7 @@ def translate(sentence):
     else:
         return '我聽不懂耶喵講中文或日文好喵 :(\n中国語または日本語を話してくださニャー :('
 
+# randomly pick a sticker
 def gen_sticker():
     package_id = random.randint(11537, 11539)
     if package_id == 11537:
@@ -24,6 +26,7 @@ def gen_sticker():
         sticker_id = random.randint(52114110, 52114149)
     return package_id, sticker_id
 
+# randomly get a cat image
 def find_cat_image():
     image_list = []
     target_url = f'https://www.google.com/search?q={image_search_keyword[random.randint(0, len(image_search_keyword) - 1)]}&tbm=isch'
@@ -34,6 +37,7 @@ def find_cat_image():
         image_list.append(image['src'])
     return image_list[random.randint(0, len(image_list) - 1)]
 
+# randomly translate 'meow' to a language
 def meow():
     target_lang = lang_abb[random.randint(0, len(lang_abb) - 1)]
     the_meow = translator.translate('喵', dest = target_lang).text

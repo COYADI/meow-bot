@@ -32,16 +32,6 @@ def callback():
 
     return 'OK'
 
-# @app.route('/meow.m4a', methods = ['GET'])
-# def meow_voice():
-#      meow_file = AudioSegment.from_file('./meow.m4a')
-
-#      return send_file(
-#          meow_file, 
-#          mimetype="audio/x-m4a", 
-#          as_attachment=True, 
-#          attachment_filename="meow.m4a")
-
 # handle message event
 @handler.add(MessageEvent, message = TextMessage)
 def handle_text_message(event):
