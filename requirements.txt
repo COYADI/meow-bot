@@ -5,6 +5,4 @@ Flask-Cors==3.0.9
 googletrans==4.0.0rc1
 gunicorn==19.9.0
 line-bot-sdk==1.18.0
-Pillow==7.2.0
-pydub==0.24.1
 requests==2.24.0
