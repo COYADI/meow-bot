@@ -49,14 +49,6 @@ def handle_text_message(event):
         return_message
     )
 
-@handler.add(MessageEvent, message = StickerMessage)
-def handle_sticker_message(event):
-    return_message = TextSendMessage(text = 'Meow!')
-    line_bot_api.reply_message(
-        event.reply_token,
-        return_message
-    )
-
 @handler.add(MessageEvent, message = FileMessage)
 def handle_file_message(event):
     if event.message.file_name.endswith('.txt'):
